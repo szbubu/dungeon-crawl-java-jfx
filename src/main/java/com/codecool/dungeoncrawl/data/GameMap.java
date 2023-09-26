@@ -1,6 +1,12 @@
 package com.codecool.dungeoncrawl.data;
 
+import com.codecool.dungeoncrawl.data.actors.Actor;
 import com.codecool.dungeoncrawl.data.actors.Player;
+import com.codecool.dungeoncrawl.data.actors.Skeleton;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class GameMap {
     private int width;
@@ -22,6 +28,20 @@ public class GameMap {
 
     public Cell getCell(int x, int y) {
         return cells[x][y];
+    }
+
+
+    public List<Actor> getAllTheEnemies(){
+        List<Actor> allTheActors=new ArrayList<>();
+        for (int x = 0; x < this.width; x++) {
+            for (int y = 0; y <height; y++) {
+                allTheActors.add(this.getCell(x,y).getActor());
+            }
+        }
+        allTheActors.removeIf(Objects::isNull);
+        allTheActors.removeIf(actor -> actor instanceof Player);
+
+        return allTheActors;
     }
 
     public void setPlayer(Player player) {
