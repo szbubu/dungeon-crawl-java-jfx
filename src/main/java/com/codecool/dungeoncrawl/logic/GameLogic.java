@@ -5,9 +5,11 @@ import com.codecool.dungeoncrawl.data.GameMap;
 
 public class GameLogic {
     private GameMap map;
+    private final EnemyMovementHandler enemyMovementHandler;
 
-    public GameLogic() {
+    public GameLogic(EnemyMovementHandler enemyMovementHandler) {
         this.map = MapLoader.loadMap();
+        this.enemyMovementHandler = enemyMovementHandler;
     }
 
     public double getMapWidth() {
@@ -29,8 +31,13 @@ public class GameLogic {
         return Integer.toString(map.getPlayer().getHealth());
     }
 
-
     public GameMap getMap() {
         return map;
     }
+
+    public void moveTheEnemies() {
+        enemyMovementHandler.performEnemyMovement(this.map);
+    }
 }
+
+
