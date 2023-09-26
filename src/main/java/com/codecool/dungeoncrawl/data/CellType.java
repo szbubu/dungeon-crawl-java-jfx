@@ -1,17 +1,23 @@
 package com.codecool.dungeoncrawl.data;
 
 public enum CellType {
-    EMPTY("empty"),
-    FLOOR("floor"),
-    WALL("wall");
+    EMPTY("empty", true),
+    FLOOR("floor", true),
+    WALL("wall", false);
 
     private final String tileName;
+    private boolean passable;
 
-    CellType(String tileName) {
+    CellType(String tileName, boolean passable) {
         this.tileName = tileName;
+        this.passable = passable;
     }
 
     public String getTileName() {
         return tileName;
+    }
+
+    public boolean isPassable() {
+        return passable;
     }
 }
