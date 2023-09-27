@@ -1,6 +1,9 @@
 package com.codecool.dungeoncrawl.ui;
 
 import com.codecool.dungeoncrawl.data.Cell;
+import com.codecool.dungeoncrawl.data.actors.Actor;
+import com.codecool.dungeoncrawl.data.actors.Player;
+import com.codecool.dungeoncrawl.data.items.Item;
 import com.codecool.dungeoncrawl.logic.GameLogic;
 import com.codecool.dungeoncrawl.ui.elements.MainStage;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.KeyHandler;
@@ -11,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.List;
 import java.util.Set;
 
 public class UI {
@@ -63,6 +67,22 @@ public class UI {
             }
         }
         mainStage.setHealthLabelText(logic.getPlayerHealth());
-        mainStage.setInventoryText("Empty");
+        mainStage.setInventoryText(getInventoryDescription());
+    }
+
+    private String getInventoryDescription() {
+        Player player = logic.getMap().getPlayer();
+
+        List<Item> inventory = player.getInventory();
+
+        if (inventory.isEmpty()) {
+            return "Empty";
+        }
+        StringBuilder value = new StringBuilder();
+
+        for (Item item : inventory) {
+            value.append(item.getTileName());
+        }
+        return value.toString();
     }
 }
