@@ -13,15 +13,21 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
+    public void attack(Actor actor){
+        actor.setHealth(this.getDamage());
+    }
+
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (nextCell.getType().isPassable()) {
+        if (nextCell.getActor()!=null){
+            this.attack(nextCell.getActor());
+        }
+
+        else if (nextCell.getType().isPassable()) {
             if (nextCell.getActor() == null) {
                 cell.setActor(null);
                 nextCell.setActor(this);
                 cell = nextCell;
-            } else {
-                //attack
             }
         }
     }
@@ -48,4 +54,5 @@ public abstract class Actor implements Drawable {
     public int getY() {
         return cell.getY();
     }
+
 }
