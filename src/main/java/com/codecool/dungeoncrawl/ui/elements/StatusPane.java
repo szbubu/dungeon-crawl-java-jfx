@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -50,18 +51,37 @@ public class StatusPane {
     }
 
     public void setInventoryValue(List<String> descriptions) {
-        if (descriptions.size() != inventoryItems.size()) {
-            for (String description : descriptions) {
-                if (!(inventoryItems.contains(description))) {
-                    addItemValueLabel(description);
-                }
+        if (descriptions.size() > inventoryItems.size()) {
+            addItemLabels(descriptions);
+        } else if (descriptions.size() < inventoryItems.size()) {
+            removeLabels(ui, "itemLabel");
+            this.inventoryItems.clear();
+            addItemLabels(descriptions);
+        }
+    }
+
+    private void addItemLabels(List<String> descriptions) {
+        for (String description : descriptions) {
+            if (!(inventoryItems.contains(description))) {
+                addItemValueLabel(description);
             }
         }
     }
 
     public void addItemValueLabel(String description) {
         Label itemLabel = new Label(description);
+        itemLabel.setUserData("itemLabel");
         inventoryItems.add(description);
         ui.add(itemLabel, 0, (inventoryYPosition + inventoryItems.size() * distanceBetweenLabels));
+    }
+
+    private void removeLabels(Pane parentPane, String target) {
+        parentPane.getChildren()
+                .removeIf(node -> {
+                    if (node instanceof Label) {
+                        return node.getUserData() != null && node.getUserData().equals(target);
+                    }
+                    return false;
+                });
     }
 }
