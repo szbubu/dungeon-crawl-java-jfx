@@ -3,9 +3,9 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 
 public abstract class  Enemy extends Actor{
-    private int vision;
-    public Enemy(Cell cell) {
-        super(cell);
+    protected int vision;
+    public Enemy(Cell cell, int health, int damage) {
+        super(cell, health, damage);
     }
 
     public int getVision() {

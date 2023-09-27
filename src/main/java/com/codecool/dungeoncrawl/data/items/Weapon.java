@@ -3,16 +3,16 @@ package com.codecool.dungeoncrawl.data.items;
 import com.codecool.dungeoncrawl.data.Cell;
 
 public abstract class Weapon extends Item{
-    private final int plusDamage;
+    private final int damageModifier;
     private String name;
 
     public Weapon(Cell cell, String name, int damage) {
         super(cell, name);
-        this.plusDamage=damage;
+        this.damageModifier =damage;
     }
 
-    public int getPlusDamage() {
-        return plusDamage;
+    public int getDamageModifier() {
+        return damageModifier;
     }
 }
 

@@ -3,9 +3,8 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 
 public class Skeleton extends Enemy {
-    private final int vision;
     public Skeleton(Cell cell) {
-        super(cell);
+        super(cell, 10, 2);
         this.vision = 4;
     }
 
