@@ -45,26 +45,42 @@ public class UI {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-        for (KeyHandler keyHandler : keyHandlers) {
-            keyHandler.perform(keyEvent, logic.getMap());
+        try {
+            for (KeyHandler keyHandler : keyHandlers) {
+                keyHandler.perform(keyEvent, logic.getMap());
+            }
+
+        logic.checkIfActorIsDead();
+        logic.moveTheEnemies();
+
+        }catch (NullPointerException e) {
+            System.out.println("GAME OVER");
+
         }
-        refresh();
+            refresh();
     }
 
+
     public void refresh() {
-        context.setFill(Color.BLACK);
-        context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int x = 0; x < logic.getMapWidth(); x++) {
-            for (int y = 0; y < logic.getMapHeight(); y++) {
-                Cell cell = logic.getCell(x, y);
-                if (cell.getActor() != null) {
-                    Tiles.drawTile(context, cell.getActor(), x, y);
-                }else if(cell.getItem() != null){
-                    Tiles.drawTile(context, cell.getItem(), x, y);
-                } else {
-                    Tiles.drawTile(context, cell, x, y);
+        try {
+            context.setFill(Color.BLACK);
+            context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            for (int x = 0; x < logic.getMapWidth(); x++) {
+                for (int y = 0; y < logic.getMapHeight(); y++) {
+                    Cell cell = logic.getCell(x, y);
+                    if (cell.getActor() != null) {
+                        Tiles.drawTile(context, cell.getActor(), x, y);
+                    } else if (cell.getItem() != null) {
+                        Tiles.drawTile(context, cell.getItem(), x, y);
+                    } else {
+                        Tiles.drawTile(context, cell, x, y);
+                    }
                 }
             }
+            mainStage.setHealthLabelText(logic.getPlayerHealth());
+            mainStage.setInventoryText("Empty");
+        }catch (NullPointerException e){
+            System.out.println("Game Over");
         }
         mainStage.setHealthLabelText(logic.getPlayerHealth());
         mainStage.setInventoryText(getInventoryDescription());
