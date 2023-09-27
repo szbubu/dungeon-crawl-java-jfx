@@ -1,5 +1,4 @@
 package com.codecool.dungeoncrawl.logic;
-
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.GameMap;
@@ -7,6 +6,7 @@ import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.data.actors.Skeleton;
 import com.codecool.dungeoncrawl.data.items.Key;
 import com.codecool.dungeoncrawl.data.items.Sword;
+import com.codecool.dungeoncrawl.data.items.Weapon;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -53,7 +53,7 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Sword(cell, "sword");
+                            new Sword(cell, "basic sword", 2);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
