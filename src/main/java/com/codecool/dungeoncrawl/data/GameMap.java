@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.data;
 
 import com.codecool.dungeoncrawl.data.actors.Actor;
+import com.codecool.dungeoncrawl.data.actors.Enemy;
 import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.data.actors.Skeleton;
 
@@ -33,16 +34,16 @@ public class GameMap {
 
 
     public List<Actor> getAllTheEnemies(){
-        List<Actor> allTheActors=new ArrayList<>();
+        List<Actor> allTheEnemies=new ArrayList<>();
         for (int x = 0; x < this.width; x++) {
             for (int y = 0; y <height; y++) {
                 Actor actor = this.getCell(x,y).getActor();
-                if(actor != null && !(actor instanceof Player)){
-                    allTheActors.add(actor);
+                if(actor instanceof Enemy){
+                    allTheEnemies.add(actor);
                 }
             }
         }
-        return allTheActors;
+        return allTheEnemies;
     }
 
     public List<Actor> getAllActors(){
@@ -56,6 +57,18 @@ public class GameMap {
             }
         }
         return allTheActors;
+    }
+    public List<Actor> getAllNPCs(){
+        List<Actor> allTheNPCs = new ArrayList<>();
+        for (int x = 0; x < this.width; x++) {
+            for (int y = 0; y <height; y++) {
+                Actor actor = this.getCell(x,y).getActor();
+                if(actor != null && !(actor instanceof Player) &&!(actor instanceof Enemy)){
+                    allTheNPCs.add(actor);
+                }
+            }
+        }
+        return allTheNPCs;
     }
 
     public void setPlayer(Player player) {
