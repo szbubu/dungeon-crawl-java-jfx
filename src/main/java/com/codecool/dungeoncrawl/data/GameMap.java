@@ -7,6 +7,7 @@ import com.codecool.dungeoncrawl.data.actors.Skeleton;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import com.codecool.dungeoncrawl.data.items.Item;
 
 public class GameMap {
     private int width;

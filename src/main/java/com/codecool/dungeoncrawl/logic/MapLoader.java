@@ -1,5 +1,4 @@
 package com.codecool.dungeoncrawl.logic;
-
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.GameMap;
@@ -49,11 +48,11 @@ public class MapLoader {
                             cell.setType(CellType.CLOSED_DOOR);
                             break;
                         case '&':
-                            cell.setType(CellType.KEY);
+                            cell.setType(CellType.FLOOR);
                             new Key(cell, "key");
                             break;
                         case 'k':
-                            cell.setType(CellType.SWORD);
+                            cell.setType(CellType.FLOOR);
                             new Sword(cell, "basic sword", 2);
                             break;
                         default:
