@@ -7,10 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Player extends Actor {
-    private int damage = 5;
+
+
     private final List<Item> inventory = new LinkedList<Item>();
+
     public Player(Cell cell) {
-        super(cell);
+        super(cell, 10, 5);
     }
 
     public String getTileName() {
@@ -22,7 +24,7 @@ public class Player extends Actor {
         int damageModifier = 0;
         for (Item item : this.inventory) {
             if (item instanceof Weapon) {
-                damageModifier=((Weapon) item).getPlusDamage();
+                damageModifier=((Weapon) item).getDamageModifier();
             }
         }
         return this.damage+damageModifier;
