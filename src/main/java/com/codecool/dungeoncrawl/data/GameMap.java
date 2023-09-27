@@ -36,12 +36,25 @@ public class GameMap {
         List<Actor> allTheActors=new ArrayList<>();
         for (int x = 0; x < this.width; x++) {
             for (int y = 0; y <height; y++) {
-                allTheActors.add(this.getCell(x,y).getActor());
+                Actor actor = this.getCell(x,y).getActor();
+                if(actor != null && !(actor instanceof Player)){
+                    allTheActors.add(actor);
+                }
             }
         }
-        allTheActors.removeIf(Objects::isNull);
-        allTheActors.removeIf(actor -> actor instanceof Player);
+        return allTheActors;
+    }
 
+    public List<Actor> getAllActors(){
+        List<Actor> allTheActors=new ArrayList<>();
+        for (int x = 0; x < this.width; x++) {
+            for (int y = 0; y <height; y++) {
+                Actor actor = this.getCell(x,y).getActor();
+                if(actor != null){
+                    allTheActors.add(actor);
+                }
+            }
+        }
         return allTheActors;
     }
 
