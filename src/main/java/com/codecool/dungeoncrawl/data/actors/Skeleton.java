@@ -2,7 +2,7 @@ package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
 
-public class Skeleton extends Actor {
+public class Skeleton extends Enemy {
     private final int vision;
     public Skeleton(Cell cell) {
         super(cell);
@@ -14,7 +14,5 @@ public class Skeleton extends Actor {
         return "skeleton";
     }
 
-    public int getVision() {
-        return vision;
-    }
+
 }

@@ -13,16 +13,24 @@ public class BasicEnemyMovementHandlerImpl implements EnemyMovementHandler {
     public void performEnemyMovement(GameMap map) {
         List<Actor> allTheEnemies = map.getAllTheEnemies();
         for (Actor enemy:allTheEnemies) {
-            moveEnemy(enemy);
+            moveActor(enemy);
         }
     }
 
-    private void moveEnemy(Actor enemy) {
+    @Override
+    public void performNPCMovement(GameMap map) {
+        List<Actor> allTheNPCs = map.getAllNPCs();
+        for (Actor npc:allTheNPCs) {
+            moveActor(npc);
+        }
+    }
+
+    private void moveActor(Actor actor) {
         int[] coordinates = {0, 0};
         int[] possibleDirections = {-1, 1};
         int randomAxis = random.nextInt(2);
         int randomDirection = possibleDirections[random.nextInt(2)];
         coordinates[randomAxis] = randomDirection;
-        enemy.move(coordinates[0], coordinates[1]);
+        actor.move(coordinates[0], coordinates[1]);
     }
 }

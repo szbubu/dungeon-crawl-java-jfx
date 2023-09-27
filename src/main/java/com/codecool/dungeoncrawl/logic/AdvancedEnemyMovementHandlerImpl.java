@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.actors.Actor;
+import com.codecool.dungeoncrawl.data.actors.Enemy;
 import com.codecool.dungeoncrawl.data.actors.Player;
 
 import java.util.List;
@@ -15,15 +16,23 @@ public class AdvancedEnemyMovementHandlerImpl implements EnemyMovementHandler{
         Player player = map.getPlayer();
         List<Actor> allTheEnemies = map.getAllTheEnemies();
         for (Actor enemy:allTheEnemies) {
-            if(checkIfPlayerIsCloseToEnemy(player,enemy)){
-                moveEnemySmartly(player,enemy, map);
+            if(checkIfEnemySeesPlayer(player,(Enemy)enemy)){
+                moveEnemySmartly(player, enemy, map);
             }
             else{
-                moveEnemyRandomly(enemy);
+                moveActorRandomly(enemy);
             }
         }
     }
-    private void moveEnemyRandomly(Actor enemy) {
+    @Override
+    public void performNPCMovement(GameMap map) {
+            List<Actor> allTheNPCs = map.getAllNPCs();
+            for (Actor npc:allTheNPCs) {
+                moveActorRandomly(npc);
+        }
+    }
+
+    private void moveActorRandomly(Actor enemy) {
         int[] coordinates = {0, 0};
         int[] possibleDirections = {-1, 1};
         int randomAxis = random.nextInt(2);
@@ -31,14 +40,14 @@ public class AdvancedEnemyMovementHandlerImpl implements EnemyMovementHandler{
         coordinates[randomAxis] = randomDirection;
         enemy.move(coordinates[0], coordinates[1]);
     }
-    private boolean checkIfPlayerIsCloseToEnemy(Player player, Actor enemy){
+    private boolean checkIfEnemySeesPlayer(Player player, Enemy enemy){
         return Math.abs(player.getX() - enemy.getX()) < enemy.getVision() || Math.abs(player.getY() - enemy.getY()) < enemy.getVision();
     }
     private void moveEnemySmartly(Player player, Actor enemy, GameMap map){
         int movementOnX = whereToMoveOnAxisX(player,enemy,map);
         int movementOnY = whereToMoveOnAxisY(player,enemy,map);
         if(movementOnX==0 && movementOnY==0){
-            moveEnemyRandomly(enemy);
+            moveActorRandomly(enemy);
         } else if (movementOnX==0) {
             enemy.move(0, movementOnY);
         }
