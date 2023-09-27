@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Random;
 
 public class AdvancedEnemyMovementHandlerImpl implements EnemyMovementHandler{
-    static final Random random = new Random();
+    static private final Random random = new Random();
+
     @Override
     public void performEnemyMovement(GameMap map) {
         Player player = map.getPlayer();
@@ -31,7 +32,7 @@ public class AdvancedEnemyMovementHandlerImpl implements EnemyMovementHandler{
         enemy.move(coordinates[0], coordinates[1]);
     }
     private boolean checkIfPlayerIsCloseToEnemy(Player player, Actor enemy){
-        return Math.abs(player.getX() - enemy.getX()) < 4 || Math.abs(player.getY() - enemy.getY()) < 4;
+        return Math.abs(player.getX() - enemy.getX()) < enemy.getVision() || Math.abs(player.getY() - enemy.getY()) < enemy.getVision();
     }
     private void moveEnemySmartly(Player player, Actor enemy, GameMap map){
         int movementOnX = whereToMoveOnAxisX(player,enemy,map);
