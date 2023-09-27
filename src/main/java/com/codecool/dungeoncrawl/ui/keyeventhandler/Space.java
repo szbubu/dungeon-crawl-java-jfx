@@ -17,8 +17,10 @@ public class Space implements KeyHandler {
             Player player = map.getPlayer();
             Cell cell = player.getCell();
             Item item = cell.getItem();
-            player.addToInventory(item);
-            cell.setItem(null);
+            if (item != null) {
+                player.addToInventory(item);
+                cell.setItem(null);
+            }
         }
     }
 }

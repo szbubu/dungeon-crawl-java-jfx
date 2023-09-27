@@ -14,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -78,27 +79,24 @@ public class UI {
                 }
             }
             mainStage.setHealthLabelText(logic.getPlayerHealth());
-            mainStage.setInventoryText("Empty");
-        }catch (NullPointerException e){
+            mainStage.setInventoryText(getInventoryDescription());
+        } catch (NullPointerException e) {
             System.out.println("Game Over");
         }
-        mainStage.setHealthLabelText(logic.getPlayerHealth());
-        mainStage.setInventoryText(getInventoryDescription());
     }
 
-    private String getInventoryDescription() {
+    private List<String> getInventoryDescription() {
         Player player = logic.getMap().getPlayer();
-
         List<Item> inventory = player.getInventory();
 
         if (inventory.isEmpty()) {
-            return "Empty";
+            return List.of();
+        } else {
+            List<String> descriptions = new LinkedList<>();
+            for (Item item : inventory) {
+                descriptions.add(item.getTileName());
+            }
+            return descriptions;
         }
-        StringBuilder value = new StringBuilder();
-
-        for (Item item : inventory) {
-            value.append(item.getTileName());
-        }
-        return value.toString();
     }
 }
