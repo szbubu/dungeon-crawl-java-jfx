@@ -2,6 +2,8 @@ package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.GameMap;
+import com.codecool.dungeoncrawl.data.actors.Actor;
+import com.codecool.dungeoncrawl.data.actors.Player;
 
 public class GameLogic {
     private GameMap map;
@@ -34,7 +36,19 @@ public class GameLogic {
     public GameMap getMap() {
         return map;
     }
-
+    public void  checkIfActorIsDead(){
+        for(Actor actor : map.getAllActors()) {
+            if (!isAlive(actor)) {
+                actor.getCell().setActor(null);
+                if(actor instanceof Player) {
+                    map.setPlayer(null);
+                }
+            }
+        }
+    }
+    public boolean isAlive(Actor actor){
+        return actor.getHealth() > 0;
+    }
     public void moveTheEnemies() {
         enemyMovementHandler.performEnemyMovement(this.map);
     }
