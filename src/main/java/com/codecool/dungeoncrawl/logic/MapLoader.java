@@ -48,11 +48,11 @@ public class MapLoader {
                             cell.setType(CellType.CLOSED_DOOR);
                             break;
                         case '&':
-                            cell.setType(CellType.KEY);
+                            cell.setType(CellType.FLOOR);
                             new Key(cell, "key");
                             break;
                         case 'k':
-                            cell.setType(CellType.SWORD);
+                            cell.setType(CellType.FLOOR);
                             new Sword(cell, "sword");
                             break;
                         default:

@@ -16,6 +16,9 @@ public class Player extends Actor {
         return "player";
     }
 
+    public void addToInventory(Item item){
+        inventory.add(item);
+    }
     public List<Item> getInventory() {
         return new LinkedList<Item>(this.inventory);
     }
