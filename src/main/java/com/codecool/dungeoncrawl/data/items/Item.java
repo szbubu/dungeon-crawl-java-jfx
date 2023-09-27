@@ -13,4 +13,9 @@ public abstract class Item implements Drawable {
         this.cell.setItem(this);
         this.name = name;
     }
+
+    public String getTileName() {
+        return this.name;
+    }
+
 }

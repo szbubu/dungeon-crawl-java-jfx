@@ -53,7 +53,7 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Sword(cell, "basic sword", 2);
+                            new Sword(cell, "sword", 2);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

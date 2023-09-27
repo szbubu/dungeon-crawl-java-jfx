@@ -11,10 +11,6 @@ public abstract class Weapon extends Item{
         this.plusDamage=damage;
     }
 
-    public String getTileName() {
-        return this.name;
-    }
-
     public int getPlusDamage() {
         return plusDamage;
     }
