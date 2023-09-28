@@ -49,11 +49,11 @@ public class MapLoader {
                             break;
                         case '&':
                             cell.setType(CellType.FLOOR);
-                            new Key(cell, "key");
+                            new Key(cell, "key", 1);
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Sword(cell, "sword", 2);
+                            new Sword(cell, "sword", 6);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
