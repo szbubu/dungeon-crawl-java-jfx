@@ -41,4 +41,8 @@ public class MainStage {
     public void setCurrentWeaponLabel(String currentWeapon) {
         this.statusPane.setCurrentWeaponValue(currentWeapon);
     }
+
+    public void setStatusLabel(String status) {
+        this.statusPane.setStatusLabel(status);
+    }
 }
