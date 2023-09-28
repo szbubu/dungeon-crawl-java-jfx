@@ -33,10 +33,14 @@ public class GameLogic {
         return Integer.toString(map.getPlayer().getHealth());
     }
 
+    public String getPlayerDamage(){
+        return Integer.toString(map.getPlayer().getDamage());
+    }
+
     public GameMap getMap() {
         return map;
     }
-    public void  checkIfActorIsDead(){
+    public void checkIfActorsAreDead(){
         for(Actor actor : map.getAllActors()) {
             if (!isAlive(actor)) {
                 actor.getCell().setActor(null);

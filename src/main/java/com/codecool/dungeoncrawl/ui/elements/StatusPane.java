@@ -19,6 +19,8 @@ public class StatusPane {
 
     private Label inventoryTextLabel;
     private Label inventoryValueLabel;
+    private Label damageValueLabel;
+    private Label damageTextLabel;
     private int inventoryYPosition;
     private List<String> inventoryItems;
 
@@ -26,9 +28,11 @@ public class StatusPane {
         ui = new GridPane();
         healthTextLabel = new Label("Health: ");
         healthValueLabel = new Label();
+        damageTextLabel = new Label("Player Damage: ");
+        damageValueLabel = new Label();
         inventoryTextLabel = new Label("Inventory: ");
         inventoryValueLabel = new Label();
-        inventoryYPosition = distanceBetweenLabels;
+        inventoryYPosition = 10;
         inventoryItems = new LinkedList<>();
     }
 
@@ -39,7 +43,11 @@ public class StatusPane {
 
         ui.add(healthTextLabel, 0, 0);
         ui.add(healthValueLabel, 1, 0);
+        ui.add(damageTextLabel, 0, 5);
+        ui.add(damageValueLabel, 1, 5);
+
         ui.add(inventoryTextLabel, 0, inventoryYPosition);
+
 
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);
@@ -48,6 +56,10 @@ public class StatusPane {
 
     public void setHealthValue(String text) {
         healthValueLabel.setText(text);
+    }
+
+    public void setDamageValueLabel(String damageValue) {
+        this.damageValueLabel.setText(damageValue);
     }
 
     public void setInventoryValue(List<String> descriptions) {

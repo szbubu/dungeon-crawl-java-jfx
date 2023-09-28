@@ -30,6 +30,10 @@ public class MainStage {
 
     public void setHealthLabelText(String text) {
         this.statusPane.setHealthValue(text);
+
+    }
+    public void setDamageLabelText(String damageValue){
+        this.statusPane.setDamageValueLabel(damageValue);
     }
     public void setInventoryText(List<String> descriptions) {
         this.statusPane.setInventoryValue(descriptions);

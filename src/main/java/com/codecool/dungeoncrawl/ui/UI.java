@@ -1,7 +1,6 @@
 package com.codecool.dungeoncrawl.ui;
 
 import com.codecool.dungeoncrawl.data.Cell;
-import com.codecool.dungeoncrawl.data.actors.Actor;
 import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.data.items.Item;
 import com.codecool.dungeoncrawl.logic.GameLogic;
@@ -51,14 +50,16 @@ public class UI {
                 keyHandler.perform(keyEvent, logic.getMap());
             }
 
-        logic.checkIfActorIsDead();
-        logic.moveTheEnemies();
+            logic.checkIfActorsAreDead();
+            logic.moveTheEnemies();
+            this.refresh();
+            logic.checkIfActorsAreDead();
 
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println("GAME OVER");
 
         }
-            refresh();
+        refresh();
     }
 
 
@@ -80,6 +81,7 @@ public class UI {
             }
             mainStage.setHealthLabelText(logic.getPlayerHealth());
             mainStage.setInventoryText(getInventoryDescription());
+            mainStage.setDamageLabelText(logic.getPlayerDamage());
         } catch (NullPointerException e) {
             System.out.println("Game Over");
         }
