@@ -8,10 +8,7 @@ import com.codecool.dungeoncrawl.data.actors.Golem;
 import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.data.actors.Skeleton;
 import com.codecool.dungeoncrawl.data.actors.Vampire;
-import com.codecool.dungeoncrawl.data.items.HealingPotion;
-import com.codecool.dungeoncrawl.data.items.Key;
-import com.codecool.dungeoncrawl.data.items.Sword;
-import com.codecool.dungeoncrawl.data.items.Weapon;
+import com.codecool.dungeoncrawl.data.items.*;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -80,6 +77,10 @@ public class MapLoader {
                             case 'h':
                                 cell.setType(CellType.FLOOR);
                                 new HealingPotion(cell, "healing-potion", 10);
+                                break;
+                            case 'b':
+                                cell.setType(CellType.FLOOR);
+                                new Hammer(cell, "hammer", 12);
                                 break;
                             default:
                                 throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
