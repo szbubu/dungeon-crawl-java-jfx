@@ -45,26 +45,18 @@ public class UI {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-        try {
-            for (KeyHandler keyHandler : keyHandlers) {
-                keyHandler.perform(keyEvent, logic.getMap());
-            }
-
-            logic.checkIfActorsAreDead();
-            logic.moveTheEnemies();
-            this.refresh();
-            logic.checkIfActorsAreDead();
-
-        } catch (NullPointerException e) {
-            System.out.println("GAME OVER");
-
+        for (KeyHandler keyHandler : keyHandlers) {
+            keyHandler.perform(keyEvent, logic.getMap());
         }
+
+        logic.removeDeadActors();
+        logic.moveTheEnemies();
+        logic.removeDeadActors();
         refresh();
     }
 
 
     public void refresh() {
-        try {
             context.setFill(Color.BLACK);
             context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
             for (int x = 0; x < logic.getMapWidth(); x++) {
@@ -83,9 +75,6 @@ public class UI {
             mainStage.setInventoryText(getInventoryDescription());
             mainStage.setDamageLabelText(logic.getPlayerDamage());
             mainStage.setCurrentWeaponLabel(logic.getPlayerCurrentWeapon());
-        } catch (NullPointerException e) {
-            System.out.println("Game Over");
-        }
     }
 
     private List<String> getInventoryDescription() {
