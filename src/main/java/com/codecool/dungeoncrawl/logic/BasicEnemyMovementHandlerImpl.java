@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public class BasicEnemyMovementHandlerImpl implements EnemyMovementHandler {
-    static private final Random random = new Random();
+    private static final Random random = new Random();
 
     @Override
     public void performEnemyMovement(GameMap map) {

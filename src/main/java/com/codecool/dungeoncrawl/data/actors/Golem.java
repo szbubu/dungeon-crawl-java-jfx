@@ -5,8 +5,7 @@ import com.codecool.dungeoncrawl.data.Cell;
 public class Golem extends Enemy {
 
     public Golem(Cell cell) {
-        super(cell, 15, 3);
-        this.vision = 1;
+        super(cell, ActorStats.GOLEM.getHealth(), ActorStats.GOLEM.getDamage(), ActorStats.GOLEM.getVision());
     }
     @Override
     public String getTileName() {
