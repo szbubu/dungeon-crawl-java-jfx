@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class AdvancedEnemyMovementHandlerImpl implements EnemyMovementHandler{
-    static private final Random random = new Random();
+    private static final Random random = new Random();
 
     @Override
     public void performEnemyMovement(GameMap map) {
@@ -49,12 +49,10 @@ public class AdvancedEnemyMovementHandlerImpl implements EnemyMovementHandler{
         if(movementOnX==0 && movementOnY==0){
             moveActorRandomly(enemy);
         }
-
         else if (movementOnX!=0 && movementOnY!=0){
             int[][] possibleMovements = {{0,movementOnY}, {movementOnX,0}};
             int [] randomMovementCoordinates = possibleMovements[random.nextInt(possibleMovements.length)];
             enemy.move(randomMovementCoordinates[0], randomMovementCoordinates[1]);
-
         }else if (movementOnX==0) {
             enemy.move(0, movementOnY);
         }

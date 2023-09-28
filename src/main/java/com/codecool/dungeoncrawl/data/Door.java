@@ -1,16 +1,22 @@
 package com.codecool.dungeoncrawl.data;
 
+import com.codecool.dungeoncrawl.data.items.Key;
+
 public class Door extends Cell{
-    private int id;
+    private final int id;
     public Door(GameMap gameMap, int x, int y, CellType type, int id) {
         super(gameMap, x, y, type);
         this.id=id;
     }
 
-    public int getId() {
-        return id;
+    public boolean tryToOpen(Key key){
+        if(key.getId()==this.id){
+            this.openDoor();
+            return true;
+        }
+        else return false;
     }
-    public void openDoor(){
+    private void openDoor(){
         this.setType(CellType.FLOOR);
         openNeighboringDoors();
     }

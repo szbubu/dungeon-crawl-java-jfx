@@ -34,13 +34,17 @@ public class Cell implements Drawable {
         this.actor = actor;
     }
 
-    public void setItem(Item item) {this.item = item;}
+    public void setItem(Item item) {
+        this.item = item;
+    }
 
     public Actor getActor() {
         return actor;
     }
 
-    public Item getItem(){return item;}
+    public Item getItem() {
+        return item;
+    }
 
     public Cell getNeighbor(int dx, int dy) {
         if (this.x + dx >= gameMap.getWidth() || this.y + dy >= gameMap.getHeight()) {
@@ -51,16 +55,18 @@ public class Cell implements Drawable {
         }
         return gameMap.getCell(x + dx, y + dy);
     }
-public List<Cell> getAllNeighbors(){
+
+    public List<Cell> getAllNeighbors() {
         List<Cell> neighboringCells = new ArrayList<>();
-    for (int x = -1; x <= 1; x++) {
-        for (int y = -1; y < 1 ; y++) {
-            neighboringCells.add(getNeighbor(x,y));
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y < 1; y++) {
+                neighboringCells.add(getNeighbor(x, y));
+            }
         }
+        neighboringCells.remove(this);
+        return neighboringCells;
     }
-    neighboringCells.remove(this);
-    return neighboringCells;
-}
+
     @Override
     public String getTileName() {
         return type.getTileName();

@@ -1,13 +1,8 @@
 package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
-import com.codecool.dungeoncrawl.data.CellType;
-import com.codecool.dungeoncrawl.data.Door;
 import com.codecool.dungeoncrawl.data.Drawable;
-import com.codecool.dungeoncrawl.data.items.Key;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class Actor implements Drawable {
     protected Cell cell;

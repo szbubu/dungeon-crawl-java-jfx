@@ -4,8 +4,7 @@ import com.codecool.dungeoncrawl.data.Cell;
 
 public class Vampire extends Enemy{
     public Vampire(Cell cell) {
-        super(cell, 5, 1);
-        this.vision = 4;
+        super(cell, ActorStats.VAMPIRE.getHealth(), ActorStats.VAMPIRE.getDamage(), ActorStats.VAMPIRE.getVision());
     }
     @Override
     public String getTileName() {
