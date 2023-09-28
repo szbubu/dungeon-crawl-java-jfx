@@ -1,10 +1,12 @@
 package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.items.Item;
+import com.codecool.dungeoncrawl.data.items.Key;
 import com.codecool.dungeoncrawl.data.items.Weapon;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Player extends Actor {
 
@@ -37,5 +39,12 @@ public class Player extends Actor {
   
     public List<Item> getInventory() {
         return new LinkedList<Item>(this.inventory);
+    }
+    public List<Key>getKeys(){
+        return this.inventory.stream().filter(e->e instanceof Key).map(e->(Key)e).collect(Collectors.toList());
+    }
+
+    public boolean removeFromInventor(Item itemToRemove){
+        return this.inventory.remove(itemToRemove);
     }
 }

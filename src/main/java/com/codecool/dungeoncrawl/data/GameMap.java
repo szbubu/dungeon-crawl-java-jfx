@@ -31,6 +31,11 @@ public class GameMap {
     public Cell getCell(int x, int y) {
         return cells[x][y];
     }
+    public void setCell(Cell cell){
+        int x = cell.getX();
+        int y = cell.getY();
+        this.cells[x][y] = cell;
+    }
 
 
     public List<Actor> getAllTheEnemies(){
