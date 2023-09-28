@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import javax.swing.text.LabelView;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,9 +17,10 @@ public class StatusPane {
     private GridPane ui;
     private Label healthTextLabel;
     private Label healthValueLabel;
-
     private Label inventoryTextLabel;
     private Label inventoryValueLabel;
+    private Label currentWeaponTextLabel;
+    private Label getCurrentWeaponValueLabel;
     private Label damageValueLabel;
     private Label damageTextLabel;
     private int inventoryYPosition;
@@ -28,11 +30,13 @@ public class StatusPane {
         ui = new GridPane();
         healthTextLabel = new Label("Health: ");
         healthValueLabel = new Label();
+        currentWeaponTextLabel = new Label("Selected weapon: ");
+        getCurrentWeaponValueLabel = new Label();
         damageTextLabel = new Label("Player Damage: ");
         damageValueLabel = new Label();
         inventoryTextLabel = new Label("Inventory: ");
         inventoryValueLabel = new Label();
-        inventoryYPosition = 10;
+        inventoryYPosition = 15;
         inventoryItems = new LinkedList<>();
     }
 
@@ -43,11 +47,11 @@ public class StatusPane {
 
         ui.add(healthTextLabel, 0, 0);
         ui.add(healthValueLabel, 1, 0);
-        ui.add(damageTextLabel, 0, 5);
-        ui.add(damageValueLabel, 1, 5);
-
+        ui.add(currentWeaponTextLabel, 0, 5);
+        ui.add(getCurrentWeaponValueLabel, 1, 5);
+        ui.add(damageTextLabel, 0, 10);
+        ui.add(damageValueLabel, 1, 10);
         ui.add(inventoryTextLabel, 0, inventoryYPosition);
-
 
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);
@@ -95,5 +99,9 @@ public class StatusPane {
                     }
                     return false;
                 });
+    }
+
+    public void setCurrentWeaponValue(String currentWeapon) {
+        getCurrentWeaponValueLabel.setText(currentWeapon);
     }
 }
