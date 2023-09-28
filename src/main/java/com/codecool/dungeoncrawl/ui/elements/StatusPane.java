@@ -6,38 +6,36 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-import javax.swing.text.LabelView;
 import java.util.LinkedList;
 import java.util.List;
 
 public class StatusPane {
     public static final int RIGHT_PANEL_WIDTH = 200;
     public static final int RIGHT_PANEL_PADDING = 10;
-    private final int distanceBetweenLabels = 5;
-    private GridPane ui;
-    private Label healthTextLabel;
-    private Label healthValueLabel;
-    private Label inventoryTextLabel;
-    private Label inventoryValueLabel;
-    private Label currentWeaponTextLabel;
-    private Label getCurrentWeaponValueLabel;
-    private Label damageValueLabel;
-    private Label damageTextLabel;
-    private int inventoryYPosition;
-    private List<String> inventoryItems;
+    private final GridPane ui;
+    private final Label healthTextLabel;
+    private final Label healthValueLabel;
+    private final Label currentWeaponTextLabel;
+    private final Label currentWeaponValueLabel;
+    private final Label damageValueLabel;
+    private final Label damageTextLabel;
+    private final Label inventoryTextLabel;
+    private final int inventoryYPosition;
+    private final List<String> inventoryItems;
+    private final Label statusLabel;
 
     public StatusPane() {
         ui = new GridPane();
         healthTextLabel = new Label("Health: ");
         healthValueLabel = new Label();
         currentWeaponTextLabel = new Label("Selected weapon: ");
-        getCurrentWeaponValueLabel = new Label();
+        currentWeaponValueLabel = new Label();
         damageTextLabel = new Label("Player Damage: ");
         damageValueLabel = new Label();
         inventoryTextLabel = new Label("Inventory: ");
-        inventoryValueLabel = new Label();
         inventoryYPosition = 15;
         inventoryItems = new LinkedList<>();
+        statusLabel = new Label();
     }
 
     public BorderPane build() {
@@ -48,10 +46,11 @@ public class StatusPane {
         ui.add(healthTextLabel, 0, 0);
         ui.add(healthValueLabel, 1, 0);
         ui.add(currentWeaponTextLabel, 0, 5);
-        ui.add(getCurrentWeaponValueLabel, 1, 5);
+        ui.add(currentWeaponValueLabel, 1, 5);
         ui.add(damageTextLabel, 0, 10);
         ui.add(damageValueLabel, 1, 10);
         ui.add(inventoryTextLabel, 0, inventoryYPosition);
+        ui.add(statusLabel, 0, 50);
 
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);
@@ -88,6 +87,7 @@ public class StatusPane {
         Label itemLabel = new Label(description);
         itemLabel.setUserData("itemLabel");
         inventoryItems.add(description);
+        int distanceBetweenLabels = 5;
         ui.add(itemLabel, 0, (inventoryYPosition + inventoryItems.size() * distanceBetweenLabels));
     }
 
@@ -102,6 +102,10 @@ public class StatusPane {
     }
 
     public void setCurrentWeaponValue(String currentWeapon) {
-        getCurrentWeaponValueLabel.setText(currentWeapon);
+        currentWeaponValueLabel.setText(currentWeapon);
+    }
+
+    public void setStatusLabel(String status) {
+        statusLabel.setText(status);
     }
 }

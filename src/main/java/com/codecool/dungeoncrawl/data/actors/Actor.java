@@ -3,7 +3,6 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.Drawable;
 
-
 public abstract class Actor implements Drawable {
     protected Cell cell;
     private int health;
@@ -61,6 +60,10 @@ public abstract class Actor implements Drawable {
 
     public int getY() {
         return cell.getY();
+    }
+
+    public boolean isAlive() {
+        return this.health > 0;
     }
 
 }

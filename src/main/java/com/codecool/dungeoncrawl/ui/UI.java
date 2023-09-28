@@ -45,26 +45,23 @@ public class UI {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-        try {
-            for (KeyHandler keyHandler : keyHandlers) {
-                keyHandler.perform(keyEvent, logic.getMap());
-            }
-
-            logic.checkIfActorsAreDead();
-            logic.moveTheEnemies();
-            this.refresh();
-            logic.checkIfActorsAreDead();
-
-        } catch (NullPointerException e) {
-            System.out.println("GAME OVER");
-
+        if (logic.isGameOver()) {
+            return;
         }
+
+        for (KeyHandler keyHandler : keyHandlers) {
+            keyHandler.perform(keyEvent, logic.getMap());
+        }
+
+        logic.removeDeadActors();
+        logic.moveTheEnemies();
+        logic.removeDeadActors();
+
         refresh();
     }
 
 
     public void refresh() {
-        try {
             context.setFill(Color.BLACK);
             context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
             for (int x = 0; x < logic.getMapWidth(); x++) {
@@ -79,13 +76,19 @@ public class UI {
                     }
                 }
             }
-            mainStage.setHealthLabelText(logic.getPlayerHealth());
-            mainStage.setInventoryText(getInventoryDescription());
-            mainStage.setDamageLabelText(logic.getPlayerDamage());
-            mainStage.setCurrentWeaponLabel(logic.getPlayerCurrentWeapon());
-        } catch (NullPointerException e) {
-            System.out.println("Game Over");
-        }
+
+            if (logic.hasPlayerLost()) {
+                mainStage.setHealthLabelText("0");
+                mainStage.setStatusLabel(logic.getStatus());
+            } else if (logic.hasPlayerWon()) {
+                System.out.println("You win");
+                mainStage.setStatusLabel(logic.getStatus());
+            } else {
+                mainStage.setHealthLabelText(logic.getPlayerHealth());
+                mainStage.setInventoryText(getInventoryDescription());
+                mainStage.setDamageLabelText(logic.getPlayerDamage());
+                mainStage.setCurrentWeaponLabel(logic.getPlayerCurrentWeapon());
+            }
     }
 
     private List<String> getInventoryDescription() {

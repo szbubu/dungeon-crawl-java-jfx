@@ -30,7 +30,7 @@ public class Player extends Actor {
 
     @Override
     public int getDamage() {
-        int damageModifier = currentWeapon.getDamageModifier();
+        int damageModifier = currentWeapon == null ? 0 : currentWeapon.getDamageModifier();
         return this.damage + damageModifier;
     }
 
