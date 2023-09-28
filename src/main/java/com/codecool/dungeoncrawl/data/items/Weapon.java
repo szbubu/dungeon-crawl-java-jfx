@@ -4,7 +4,6 @@ import com.codecool.dungeoncrawl.data.Cell;
 
 public abstract class Weapon extends Item{
     private final int damageModifier;
-    private String name;
 
     public Weapon(Cell cell, String name, int damage) {
         super(cell, name);

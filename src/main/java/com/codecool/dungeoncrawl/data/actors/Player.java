@@ -36,6 +36,9 @@ public class Player extends Actor {
 
     public void addToInventory(Item item) {
         inventory.add(item);
+        if(item instanceof Weapon && this.currentWeapon == null){
+            this.switchActiveWeapon();
+        }
     }
 
     @Override
