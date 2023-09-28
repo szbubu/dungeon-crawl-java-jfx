@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.Door;
+import com.codecool.dungeoncrawl.data.items.HealingPotion;
 import com.codecool.dungeoncrawl.data.items.Item;
 import com.codecool.dungeoncrawl.data.items.Key;
 import com.codecool.dungeoncrawl.data.items.Weapon;
@@ -35,7 +36,15 @@ public class Player extends Actor {
     }
 
     public void addToInventory(Item item) {
-        inventory.add(item);
+        if (item instanceof HealingPotion) {
+            HealingPotion potion = (HealingPotion) item;
+            this.heal(potion.getAmountToHeal());
+        } else {
+            inventory.add(item);
+            if (item instanceof Weapon && this.currentWeapon == null) {
+                this.switchActiveWeapon();
+            }
+        }
     }
 
     @Override
