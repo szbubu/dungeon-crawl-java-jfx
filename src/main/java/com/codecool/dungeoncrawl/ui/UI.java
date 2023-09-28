@@ -45,6 +45,10 @@ public class UI {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
+        if (logic.isGameOver()) {
+            return;
+        }
+
         for (KeyHandler keyHandler : keyHandlers) {
             keyHandler.perform(keyEvent, logic.getMap());
         }
@@ -52,6 +56,7 @@ public class UI {
         logic.removeDeadActors();
         logic.moveTheEnemies();
         logic.removeDeadActors();
+
         refresh();
     }
 
@@ -71,10 +76,17 @@ public class UI {
                     }
                 }
             }
-            mainStage.setHealthLabelText(logic.getPlayerHealth());
-            mainStage.setInventoryText(getInventoryDescription());
-            mainStage.setDamageLabelText(logic.getPlayerDamage());
-            mainStage.setCurrentWeaponLabel(logic.getPlayerCurrentWeapon());
+
+            if (logic.hasPlayerLost()) {
+                mainStage.setHealthLabelText("0");
+            } else if (logic.hasPlayerWon()) {
+                System.out.println("You win");
+            } else {
+                mainStage.setHealthLabelText(logic.getPlayerHealth());
+                mainStage.setInventoryText(getInventoryDescription());
+                mainStage.setDamageLabelText(logic.getPlayerDamage());
+                mainStage.setCurrentWeaponLabel(logic.getPlayerCurrentWeapon());
+            }
     }
 
     private List<String> getInventoryDescription() {

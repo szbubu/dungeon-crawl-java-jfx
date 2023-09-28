@@ -60,6 +60,7 @@ public class GameLogic {
     public GameMap getMap() {
         return map;
     }
+
     public void removeDeadActors() {
         for (Actor actor : map.getAllActors()) {
             if (!(actor.isAlive())) {
@@ -70,6 +71,19 @@ public class GameLogic {
             }
         }
     }
+
+    public boolean hasPlayerLost() {
+        return map.getPlayer() == null;
+    }
+
+    public boolean hasPlayerWon() {
+        return map.getAllTheEnemies().isEmpty();
+    }
+
+    public boolean isGameOver() {
+        return hasPlayerLost() || hasPlayerWon();
+    }
+
     public void moveTheEnemies() {
         enemyMovementHandler.performEnemyMovement(this.map);
     }
