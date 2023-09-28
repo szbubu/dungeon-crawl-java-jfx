@@ -8,9 +8,13 @@ public enum CellType {
     CLOSED_DOOR("closed-door", false);
 
     private final String tileName;
-    private boolean passable;
+    private final boolean passable;
 
     CellType(String tileName, boolean passable) {
+        this.tileName = tileName;
+        this.passable = passable;
+    }
+    CellType(String tileName, boolean passable, int doorId) {
         this.tileName = tileName;
         this.passable = passable;
     }

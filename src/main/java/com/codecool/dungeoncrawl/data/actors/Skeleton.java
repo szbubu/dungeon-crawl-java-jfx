@@ -5,7 +5,7 @@ import com.codecool.dungeoncrawl.data.Cell;
 public class Skeleton extends Enemy {
     public Skeleton(Cell cell) {
         super(cell, 10, 2);
-        this.vision = 4;
+        this.vision = 2;
     }
 
     @Override

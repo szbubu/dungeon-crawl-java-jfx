@@ -48,7 +48,14 @@ public class AdvancedEnemyMovementHandlerImpl implements EnemyMovementHandler{
         int movementOnY = whereToMoveOnAxisY(player,enemy,map);
         if(movementOnX==0 && movementOnY==0){
             moveActorRandomly(enemy);
-        } else if (movementOnX==0) {
+        }
+
+        else if (movementOnX!=0 && movementOnY!=0){
+            int[][] possibleMovements = {{0,movementOnY}, {movementOnX,0}};
+            int [] randomMovementCoordinates = possibleMovements[random.nextInt(possibleMovements.length)];
+            enemy.move(randomMovementCoordinates[0], randomMovementCoordinates[1]);
+
+        }else if (movementOnX==0) {
             enemy.move(0, movementOnY);
         }
         else{
