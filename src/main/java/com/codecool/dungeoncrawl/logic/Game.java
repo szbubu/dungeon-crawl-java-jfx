@@ -17,10 +17,10 @@ public class Game extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         EnemyMovementHandler enemyMovementHandler = new AdvancedEnemyMovementHandlerImpl();
         this.logic = new GameLogic(enemyMovementHandler);
-        this.keyHandlers = Set.of(new Up(), new Down(), new Left(), new Right(), new Space());
+        this.keyHandlers = Set.of(new Up(), new Down(), new Left(), new Right(), new Space(), new KeyboardE());
         this.ui = new UI(logic, keyHandlers);
         ui.setUpPain(primaryStage);
 

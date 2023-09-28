@@ -38,4 +38,7 @@ public class MainStage {
     public void setInventoryText(List<String> descriptions) {
         this.statusPane.setInventoryValue(descriptions);
     }
+    public void setCurrentWeaponLabel(String currentWeapon) {
+        this.statusPane.setCurrentWeaponValue(currentWeapon);
+    }
 }

@@ -37,6 +37,10 @@ public class GameLogic {
         return Integer.toString(map.getPlayer().getDamage());
     }
 
+    public String getPlayerCurrentWeapon() {
+        return map.getPlayer().getCurrentWeapon().getTileName();
+    }
+
     public GameMap getMap() {
         return map;
     }

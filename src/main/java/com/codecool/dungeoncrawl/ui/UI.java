@@ -82,6 +82,7 @@ public class UI {
             mainStage.setHealthLabelText(logic.getPlayerHealth());
             mainStage.setInventoryText(getInventoryDescription());
             mainStage.setDamageLabelText(logic.getPlayerDamage());
+            mainStage.setCurrentWeaponLabel(logic.getPlayerCurrentWeapon());
         } catch (NullPointerException e) {
             System.out.println("Game Over");
         }
