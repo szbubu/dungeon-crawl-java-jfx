@@ -4,6 +4,7 @@ import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.actors.Actor;
 import com.codecool.dungeoncrawl.data.actors.Player;
+import com.codecool.dungeoncrawl.data.items.Weapon;
 
 public class GameLogic {
     private GameMap map;
@@ -30,32 +31,44 @@ public class GameLogic {
     }
 
     public String getPlayerHealth() {
-        return Integer.toString(map.getPlayer().getHealth());
+        Player player = map.getPlayer();
+
+        if (player == null) {
+            return "0";
+        } else {
+            int health = player.getHealth();
+            if (health <= 0) return "0";
+            return Integer.toString(map.getPlayer().getHealth());
+        }
     }
 
     public String getPlayerDamage(){
+        if (map.getPlayer() == null) {
+            return "0";
+        }
         return Integer.toString(map.getPlayer().getDamage());
     }
 
     public String getPlayerCurrentWeapon() {
-        return map.getPlayer().getCurrentWeapon().getTileName();
+        Weapon currentWeapon = map.getPlayer().getCurrentWeapon();
+        if (currentWeapon == null) {
+            return "None";
+        }
+        return currentWeapon.getTileName();
     }
 
     public GameMap getMap() {
         return map;
     }
-    public void checkIfActorsAreDead(){
-        for(Actor actor : map.getAllActors()) {
-            if (!isAlive(actor)) {
+    public void removeDeadActors() {
+        for (Actor actor : map.getAllActors()) {
+            if (!(actor.isAlive())) {
                 actor.getCell().setActor(null);
-                if(actor instanceof Player) {
+                if (actor instanceof Player) {
                     map.setPlayer(null);
                 }
             }
         }
-    }
-    public boolean isAlive(Actor actor){
-        return actor.getHealth() > 0;
     }
     public void moveTheEnemies() {
         enemyMovementHandler.performEnemyMovement(this.map);
