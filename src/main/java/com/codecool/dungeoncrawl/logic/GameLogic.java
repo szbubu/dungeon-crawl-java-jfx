@@ -87,6 +87,16 @@ public class GameLogic {
     public void moveTheEnemies() {
         enemyMovementHandler.performEnemyMovement(this.map);
     }
+
+    public String getStatus() {
+        if (hasPlayerWon()) {
+            return "You won!";
+        } else if (hasPlayerLost()) {
+            return "You lost!";
+        } else {
+            return "";
+        }
+    }
 }
 
 

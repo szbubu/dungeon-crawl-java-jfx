@@ -79,8 +79,10 @@ public class UI {
 
             if (logic.hasPlayerLost()) {
                 mainStage.setHealthLabelText("0");
+                mainStage.setStatusLabel(logic.getStatus());
             } else if (logic.hasPlayerWon()) {
                 System.out.println("You win");
+                mainStage.setStatusLabel(logic.getStatus());
             } else {
                 mainStage.setHealthLabelText(logic.getPlayerHealth());
                 mainStage.setInventoryText(getInventoryDescription());
