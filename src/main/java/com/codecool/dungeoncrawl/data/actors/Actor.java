@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class Actor implements Drawable {
-    private Cell cell;
+    protected Cell cell;
     private int health;
     protected int damage;
 
@@ -27,7 +27,7 @@ public abstract class Actor implements Drawable {
         this.damage = damage;
     }
 
-    public void attack(Actor actor) {
+    private void attack(Actor actor) {
         actor.applyDamageToHealth(this.getDamage());
     }
 
@@ -41,39 +41,11 @@ public abstract class Actor implements Drawable {
                 nextCell.setActor(this);
                 cell = nextCell;
             }
-        } else if (nextCell.getType().equals(CellType.CLOSED_DOOR) && this instanceof Player) {
-            Key matchingKey = this.findMatchingKey(nextCell);
-            if (matchingKey == null) {
-                return;
-            } else if (matchingKey instanceof Key) {
-                Door door = (Door) nextCell;
-                door.openDoor();
-                cell.setActor(null);
-                nextCell.setActor(this);
-                cell = nextCell;
-                Player player = (Player) this;
-                player.removeFromInventor(matchingKey);
-            }
-
         }
-
     }
 
     public int getHealth() {
         return health;
-    }
-
-    private Key findMatchingKey(Cell nextCell) {
-        Door door = (Door) nextCell;
-        Player player = (Player) this;
-        List<Key> keys = player.getKeys();
-        List<Key> matchingKeys = keys.stream().filter(e -> e.getId() == door.getId())
-                .collect(Collectors.toList());
-        if (matchingKeys.isEmpty()) {
-            return null;
-        }
-        return matchingKeys.get(0);
-
     }
 
     public void applyDamageToHealth(int damage) {
