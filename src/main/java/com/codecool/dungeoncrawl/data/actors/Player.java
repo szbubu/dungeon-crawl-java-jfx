@@ -1,5 +1,8 @@
 package com.codecool.dungeoncrawl.data.actors;
+
 import com.codecool.dungeoncrawl.data.Cell;
+import com.codecool.dungeoncrawl.data.CellType;
+import com.codecool.dungeoncrawl.data.Door;
 import com.codecool.dungeoncrawl.data.items.Item;
 import com.codecool.dungeoncrawl.data.items.Key;
 import com.codecool.dungeoncrawl.data.items.Weapon;
@@ -10,39 +13,65 @@ import java.util.stream.Collectors;
 
 public class Player extends Actor {
     private final List<Item> inventory = new LinkedList<>();
-
     private Weapon currentWeapon;
+
     public Player(Cell cell) {
         super(cell, 10, 0);
     }
-
     public String getTileName() {
         return "player";
     }
-
     public Weapon getCurrentWeapon() {
         return currentWeapon;
     }
-
     @Override
     public int getDamage() {
         int damageModifier = currentWeapon.getDamageModifier();
         return this.damage + damageModifier;
     }
-
     public void addToInventory(Item item){
-        inventory.add(item);
+            inventory.add(item);
     }
-  
+    @Override
+    public void move(int dx, int dy) {
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        if (nextCell.getType().equals(CellType.CLOSED_DOOR)) {
+            Key matchingKey = this.findMatchingKey(nextCell);
+            if (matchingKey == null) {
+                return;
+            } else if (matchingKey instanceof Key) {
+                Door door = (Door) nextCell;
+                door.openDoor();
+                cell.setActor(null);
+                nextCell.setActor(this);
+                cell = nextCell;
+                this.removeFromInventory(matchingKey);
+            }
+        } else {
+            super.move(dx, dy);
+        }
+    }
+
+    private Key findMatchingKey(Cell nextCell) {
+        Door door = (Door) nextCell;
+        Player player = (Player) this;
+        List<Key> keys = player.getKeys();
+        List<Key> matchingKeys = keys.stream().filter(e -> e.getId() == door.getId())
+                .collect(Collectors.toList());
+        if (matchingKeys.isEmpty()) {
+            return null;
+        }
+        return matchingKeys.get(0);
+    }
     public List<Item> getInventory() {
         return new LinkedList<>(this.inventory);
     }
 
-    public List<Key>getKeys(){
-        return this.inventory.stream().filter(e->e instanceof Key).map(e->(Key)e).collect(Collectors.toList());
+    public List<Key> getKeys() {
+        return this.inventory.stream().filter(e -> e instanceof Key).map(e -> (Key) e).collect(Collectors.toList());
     }
 
-    public boolean removeFromInventor(Item itemToRemove){
+    public boolean removeFromInventory(Item itemToRemove) {
         return this.inventory.remove(itemToRemove);
     }
 

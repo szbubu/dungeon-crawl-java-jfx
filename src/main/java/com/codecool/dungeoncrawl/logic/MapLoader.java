@@ -4,8 +4,10 @@ import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.Door;
 import com.codecool.dungeoncrawl.data.GameMap;
+import com.codecool.dungeoncrawl.data.actors.Golem;
 import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.data.actors.Skeleton;
+import com.codecool.dungeoncrawl.data.actors.Vampire;
 import com.codecool.dungeoncrawl.data.items.Key;
 import com.codecool.dungeoncrawl.data.items.Sword;
 import com.codecool.dungeoncrawl.data.items.Weapon;
@@ -53,6 +55,14 @@ public class MapLoader {
                             case 's':
                                 cell.setType(CellType.FLOOR);
                                 new Skeleton(cell);
+                                break;
+                            case 'v':
+                                cell.setType(CellType.FLOOR);
+                                new Vampire(cell);
+                                break;
+                            case 'g':
+                                cell.setType(CellType.FLOOR);
+                                new Golem(cell);
                                 break;
                             case '@':
                                 cell.setType(CellType.FLOOR);
