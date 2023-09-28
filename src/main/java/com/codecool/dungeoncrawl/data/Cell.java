@@ -60,10 +60,11 @@ public class Cell implements Drawable {
         List<Cell> neighboringCells = new ArrayList<>();
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y < 1; y++) {
-                neighboringCells.add(getNeighbor(x, y));
+                if(!this.equals(getNeighbor(x,y))) {
+                    neighboringCells.add(getNeighbor(x, y));
+                }
             }
         }
-        neighboringCells.remove(this);
         return neighboringCells;
     }
 
