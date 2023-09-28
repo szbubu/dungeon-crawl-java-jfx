@@ -10,4 +10,11 @@ public class Door extends Cell{
     public int getId() {
         return id;
     }
+    public void openDoor(){
+        this.setType(CellType.FLOOR);
+        openNeighboringDoors();
+    }
+    private void openNeighboringDoors(){
+        this.getAllNeighbors().stream().filter(c->c.getType().equals(CellType.CLOSED_DOOR)).map(d->(Door)d).forEach(Door::openDoor);
+    }
 }

@@ -46,7 +46,8 @@ public abstract class Actor implements Drawable {
             if (matchingKey == null) {
                 return;
             } else if (matchingKey instanceof Key) {
-                nextCell.setType(CellType.FLOOR);
+                Door door = (Door) nextCell;
+                door.openDoor();
                 cell.setActor(null);
                 nextCell.setActor(this);
                 cell = nextCell;
