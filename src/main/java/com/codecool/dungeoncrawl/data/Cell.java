@@ -58,13 +58,10 @@ public class Cell implements Drawable {
 
     public List<Cell> getAllNeighbors() {
         List<Cell> neighboringCells = new ArrayList<>();
-        for (int x = -1; x <= 1; x++) {
-            for (int y = -1; y < 1; y++) {
-                if(!this.equals(getNeighbor(x,y))) {
-                    neighboringCells.add(getNeighbor(x, y));
-                }
-            }
-        }
+        neighboringCells.add(getNeighbor(0, 1));
+        neighboringCells.add(getNeighbor(0, -1));
+        neighboringCells.add(getNeighbor(1, 0));
+        neighboringCells.add(getNeighbor(-1, 0));
         return neighboringCells;
     }
 
