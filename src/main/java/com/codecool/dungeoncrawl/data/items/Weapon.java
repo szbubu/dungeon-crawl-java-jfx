@@ -7,7 +7,7 @@ public abstract class Weapon extends Item{
 
     public Weapon(Cell cell, String name, int damage) {
         super(cell, name);
-        this.damageModifier =damage;
+        this.damageModifier = damage;
     }
 
     public int getDamageModifier() {
